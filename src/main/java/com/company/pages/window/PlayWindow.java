@@ -112,7 +112,6 @@ public class PlayWindow extends JFrame {
     }
 
     public void setUpComboBoxItems(List<Dice> dices) {
-        System.out.println("update sucessfull");
         int count = 0;
         Dice[] obj = new Dice[dices.size()];
         for (Dice d : dices) {
@@ -120,7 +119,6 @@ public class PlayWindow extends JFrame {
             count++;
         }
         jComboBox1.setModel(new DefaultComboBoxModel<>(obj));
-        System.out.println("dice list updated::" + dices);
     }
 
     private void initComponents() {
@@ -200,7 +198,6 @@ public class PlayWindow extends JFrame {
         deleteBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) throws UnsupportedOperationException {
-                System.out.println("*************delete a dice, in delete function**************");
                 deleteBtnActionPerformed(e);
             }
         });
@@ -371,25 +368,19 @@ public class PlayWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) throws UnsupportedOperationException {
                 createManualMotifs();
-                System.out.println("listes des motifs images:::" + listesMotifs);
                 if (isDiceCreatedImage) {
                     if (!diceList.contains(createDice(listesMotifs.size(), listesMotifs))) {
                         diceList.add(createDice(listesMotifs.size(), listesMotifs));
                         isDiceCreatedImage = false;
-                    } else {
-                        System.out.println("dice already created...");
-                    }
+                    } 
                 } else if (isDiceCreatedManual) {
                     if (!diceList.contains(createDice(manualMotifs.size(), manualMotifs))) {
                         diceList.add(createDice(manualMotifs.size(), manualMotifs));
                         isDiceCreatedManual = false;
-                    } else {
-                        System.out.println("dice already created...");
-                    }
+                    } 
                 }
                 setUpComboBoxItems(diceList);
                 updateFrame(win);
-                System.out.println("listes total des dés::" + diceList);
             }
         });
         contentPaneDice.add(save);
@@ -544,7 +535,6 @@ public class PlayWindow extends JFrame {
                 if (selFiles.length > 0) {
                     isDiceCreatedImage = true;
                     for (File f : selFiles) {
-                        System.out.println("file path::: " + f.toString());
                         imageName = createImageMotif(f.toString());
                         images.add(displayImageToFrame(f.toString()));
                         listesMotifs.add(imageName);
@@ -554,7 +544,6 @@ public class PlayWindow extends JFrame {
                     createMoveButton();
                     fen.setImages(images);
                     fen.repaint();
-                    System.out.println("listes avec images crées::" + diceList);
                 }
             }
         });
@@ -621,8 +610,6 @@ public class PlayWindow extends JFrame {
             listDiceSelected.add(listDices[indiceDiceSelected[i]][0]);
         }
 
-        System.out.println("resultats lances:::" + rollManyDiceByIndice(listDiceSelected));
-
         if (!listOfLabels.isEmpty()) {
             for (JLabel label : listOfLabels) {
                 if (jPanel1.isAncestorOf(label)) {
@@ -661,7 +648,6 @@ public class PlayWindow extends JFrame {
             listOfLabels.add(resultLabel);
         }
         updateFrame(win);
-        System.out.println("results::" + results);
     }
 
     /**
@@ -760,8 +746,6 @@ public class PlayWindow extends JFrame {
                 motifs = listDices[indiceDiceSelected[i]][0].getDiceMotif();
                 diceEdited = listDices[indiceDiceSelected[i]][0];
             }
-
-            System.out.println("motifs::::" + motifs);
             createEditedFrame(numberOfFace, motifs);
         }
     }
