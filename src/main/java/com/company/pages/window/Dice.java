@@ -8,6 +8,7 @@ public class Dice {
 
     private int nbFace;
     private List<Motif> diceMotif;
+    private final Random random = new Random();
   
     public Dice(int nbFace, List<Motif> diceMotif) {
         this.nbFace = nbFace;
@@ -18,11 +19,14 @@ public class Dice {
     }
     
     public String showOffMotif(Dice d){
-        String motifString = "";
-        for(Motif m:diceMotif){
-            motifString += " " + m.getMotifName();
+         if (diceMotif == null || diceMotif.isEmpty()) {
+            return "(no motifs)";
         }
-        return motifString;
+        StringBuilder motifString = new StringBuilder();
+        for (Motif m : diceMotifs) {
+            motifString.append(" ").append(m.getMotifName());
+        }
+        return motifString.toString();
     }
 
     public Object rollDice() {
